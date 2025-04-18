@@ -22,6 +22,7 @@ public class App
                 dashes.add("_");
         }
         while (wrongGuess < 6) {
+                System.out.print(getHangmanArt(wrongGuess));
                 System.out.print("Word: ");        
                 for (String c : dashes) {
                         System.out.print(c + " "); 
@@ -32,17 +33,19 @@ public class App
                 letterguessedStr = scanner.next().toLowerCase();
                 letterguessedChar = letterguessedStr.charAt(0);
                 if (guessedWord.indexOf(letterguessedChar) != -1) {
-                        System.out.println("Correct Guess");
                         for (int i = 0; i < guessedWord.length(); i++) {
                             if (guessedWord.charAt(i) == letterguessedChar) {
                                 dashes.set(i, letterguessedStr);
                             }   
                         }
+                        if (!dashes.contains("_")) {
+                           System.out.println("You win");
+                           break;     
+                        }
                 }
                 else{
                         System.out.println("Wrong Guess");
-                        wrongGuess++;
-                        System.out.println(getHangmanArt(wrongGuess)); 
+                        wrongGuess++; 
                 }
 
                   
