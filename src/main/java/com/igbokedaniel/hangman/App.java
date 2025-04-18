@@ -10,17 +10,45 @@ public class App
 {
     public static void main( String[] args )
     {
-        int tracker;
+        int wrongGuess = 0;
         String guessedWord;
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> dashes = new ArrayList<>();
-
-        guessedWord = "Bibles";
+        String letterguessedStr;
+        char letterguessedChar;
+        guessedWord = "bibles";
 
         for(int i=1;i<=guessedWord.length();i++){
                 dashes.add("_");
         }
-        System.out.println(dashes);
+        while (wrongGuess < 6) {
+                System.out.print("Word: ");        
+                for (String c : dashes) {
+                        System.out.print(c + " "); 
+                }
+                System.out.println();
+                System.out.print("Guess a Letter: ");
+
+                letterguessedStr = scanner.next().toLowerCase();
+                letterguessedChar = letterguessedStr.charAt(0);
+                if (guessedWord.indexOf(letterguessedChar) != -1) {
+                        System.out.println("Correct Guess");
+                        for (int i = 0; i < guessedWord.length(); i++) {
+                            if (guessedWord.charAt(i) == letterguessedChar) {
+                                dashes.set(i, letterguessedStr);
+                            }   
+                        }
+                }
+                else{
+                        System.out.println("Wrong Guess");
+                        wrongGuess++;
+                        System.out.println(getHangmanArt(wrongGuess)); 
+                }
+
+                  
+        }
+
+        // System.out.println(dashes);
         
         scanner.close();
     }
