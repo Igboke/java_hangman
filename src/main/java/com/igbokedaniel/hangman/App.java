@@ -1,6 +1,12 @@
 package com.igbokedaniel.hangman;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Used Maven
@@ -12,10 +18,19 @@ public class App
     {
         int wrongGuess = 0;
         String guessedWord;
+        java.util.List<String> wordList;
+        String filePathString = "C:\\Users\\Lenovo\\Desktop\\hangman_java\\src\\main\\java\\com\\igbokedaniel\\hangman\\wordsList.txt";
         Scanner scanner = new Scanner(System.in);
         ArrayList<Character> dashes = new ArrayList<>();
+        java.util.List<String> listOfWords = null;
         char letterguessedChar;
-        guessedWord = "bibles";
+        Random random = new Random();
+        
+        wordList = getGuessedWord(filePathString, listOfWords);
+        guessedWord = wordList.get(random.nextInt(wordList.size()));
+
+        System.out.println(getGuessedWord(filePathString, listOfWords));
+
 
         for(int i=1;i<=guessedWord.length();i++){
                 dashes.add('_');
@@ -96,5 +111,22 @@ public class App
                     """;
             default -> " ";
         };
+    }
+    static java.util.List<String> getGuessedWord(String filePath, java.util.List<String> listOfWords){
+        //create the path
+        Path newFilePath = Paths.get(filePath);
+        
+
+        //potentially dangerous so it should be wrapped in a try block
+        try{
+                // readlines to a list
+                listOfWords = Files.readAllLines(newFilePath,StandardCharsets.UTF_8);
+        }
+        catch(IOException e){
+                System.out.println("Error in parsing");
+        }
+
+        
+        return listOfWords;
     }
 }
