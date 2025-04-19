@@ -13,32 +13,30 @@ public class App
         int wrongGuess = 0;
         String guessedWord;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> dashes = new ArrayList<>();
-        String letterguessedStr;
+        ArrayList<Character> dashes = new ArrayList<>();
         char letterguessedChar;
         guessedWord = "bibles";
 
         for(int i=1;i<=guessedWord.length();i++){
-                dashes.add("_");
+                dashes.add('_');
         }
         while (wrongGuess < 6) {
                 System.out.print(getHangmanArt(wrongGuess));
                 System.out.print("Word: ");        
-                for (String c : dashes) {
+                for (char c : dashes) {
                         System.out.print(c + " "); 
                 }
                 System.out.println();
                 System.out.print("Guess a Letter: ");
 
-                letterguessedStr = scanner.next().toLowerCase();
-                letterguessedChar = letterguessedStr.charAt(0);
+                letterguessedChar = scanner.next().toLowerCase().charAt(0);
                 if (guessedWord.indexOf(letterguessedChar) != -1) {
                         for (int i = 0; i < guessedWord.length(); i++) {
                             if (guessedWord.charAt(i) == letterguessedChar) {
-                                dashes.set(i, letterguessedStr);
+                                dashes.set(i, letterguessedChar);
                             }   
                         }
-                        if (!dashes.contains("_")) {
+                        if (!dashes.contains('_')) {
                            System.out.println("You win");
                            break;     
                         }
@@ -51,7 +49,9 @@ public class App
                   
         }
 
-        // System.out.println(dashes);
+        if (wrongGuess >= 6) {
+                System.out.printf("\nThe Correct word is %s",guessedWord);
+        }
         
         scanner.close();
     }
