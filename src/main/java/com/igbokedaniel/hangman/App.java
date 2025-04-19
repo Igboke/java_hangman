@@ -59,9 +59,7 @@ public class App
                 else{
                         System.out.println("Wrong Guess");
                         wrongGuess++; 
-                }
-
-                  
+                }          
         }
 
         if (wrongGuess >= 6) {
