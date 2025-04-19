@@ -29,9 +29,6 @@ public class App
         wordList = getGuessedWord(filePathString, listOfWords);
         guessedWord = wordList.get(random.nextInt(wordList.size()));
 
-        System.out.println(getGuessedWord(filePathString, listOfWords));
-
-
         for(int i=1;i<=guessedWord.length();i++){
                 dashes.add('_');
         }
@@ -113,7 +110,6 @@ public class App
     static java.util.List<String> getGuessedWord(String filePath, java.util.List<String> listOfWords){
         //create the path
         Path newFilePath = Paths.get(filePath);
-        
 
         //potentially dangerous so it should be wrapped in a try block
         try{
@@ -123,7 +119,6 @@ public class App
         catch(IOException e){
                 System.out.println("Error in parsing");
         }
-
         
         return listOfWords;
     }
